@@ -13,7 +13,8 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
-
+<script type="text/javascript" src="../javascript/calendar.js">
+</script>
 <style>
        body > div.container{
         	border: 3px solid #D6CDB7;
@@ -89,80 +90,53 @@ function fncAddProduct(){
 	
 		<div class="page-header text-center">
 	       <h3 class=" text-info">상 품 등 록</h3>
-	       <h5 class="text-muted">내 정보를 <strong class="text-danger">최신정보로 관리</strong>해 주세요.</h5>
+	       <h5 class="text-muted">상품을 <strong class="text-danger">등록</strong>해 주세요.</h5>
 	    </div>
 	    
 	    <!-- form Start /////////////////////////////////////-->
 		<form class="form-horizontal">
 		
 		  <div class="form-group">
-		    <label for="userId" class="col-sm-offset-1 col-sm-3 control-label">아 이 디</label>
+		    <label for="prodName" class="col-sm-offset-1 col-sm-3 control-label">상 품 명</label>
 		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="userId" name="userId" value="${user.userId }" placeholder="중복확인하세요"  readonly>
+		      <input type="text" class="form-control" id="prodName" name="prodName" placeholder="상품명을 입력하세요.">
 		       <span id="helpBlock" class="help-block">
-		      	<strong class="text-danger">아이디는 수정불가</strong>
 		      </span>
 		    </div>
 		  </div>
 		
 		  <div class="form-group">
-		    <label for="password" class="col-sm-offset-1 col-sm-3 control-label">비밀번호</label>
+		    <label for="prodDetail" class="col-sm-offset-1 col-sm-3 control-label">상품상세정보</label>
 		    <div class="col-sm-4">
-		      <input type="password" class="form-control" id="password" name="password" placeholder="변경비밀번호">
+		      <input type="text" class="form-control" id="prodDetail" name="prodDetail" placeholder="상품상세정보를 입력하세요.">
 		    </div>
 		  </div>
 		  
 		  <div class="form-group">
-		    <label for="password2" class="col-sm-offset-1 col-sm-3 control-label">비밀번호 확인</label>
+		    <label for="manuDate" class="col-sm-offset-1 col-sm-3 control-label">제조일자</label><img src="../images/ct_icon_date.gif" width="15" height="15" 
+										onclick="show_calendar('document.detailForm.manuDate', document.detailForm.manuDate.value)"/>
 		    <div class="col-sm-4">
-		      <input type="password" class="form-control" id="password2" name="password2" placeholder="변경비밀번호 확인">
+		      <input type="text" class="form-control" id="manuDate" name="manuDate" placeholder="제조일자를 선택하세요.">
 		    </div>
 		  </div>
 		  
 		  <div class="form-group">
-		    <label for="userName" class="col-sm-offset-1 col-sm-3 control-label">이름</label>
+		    <label for="price" class="col-sm-offset-1 col-sm-3 control-label">가격</label>
 		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="userName" name="userName" value="${user.userName}" placeholder="변경회원이름">
+		      <input type="text" class="form-control" id="price" name="price" placeholder="가격을 입력하세요." >
 		    </div>
 		  </div>
 		  
 		  <div class="form-group">
-		    <label for="ssn" class="col-sm-offset-1 col-sm-3 control-label">주소</label>
+		    <label for="fileName" class="col-sm-offset-1 col-sm-3 control-label">상품이미지</label>
 		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="addr" name="addr"  value="${user.addr}" placeholder="변경주소">
-		    </div>
-		  </div>
-		  
-		  <div class="form-group">
-		    <label for="ssn" class="col-sm-offset-1 col-sm-3 control-label">휴대전화번호</label>
-		     <div class="col-sm-2">
-		      <select class="form-control" name="phone1" id="phone1">
-				  	<option value="010" ${ ! empty user.phone1 && user.phone1 == "010" ? "selected" : ""  } >010</option>
-					<option value="011" ${ ! empty user.phone1 && user.phone1 == "011" ? "selected" : ""  } >011</option>
-					<option value="016" ${ ! empty user.phone1 && user.phone1 == "016" ? "selected" : ""  } >016</option>
-					<option value="018" ${ ! empty user.phone1 && user.phone1 == "018" ? "selected" : ""  } >018</option>
-					<option value="019" ${ ! empty user.phone1 && user.phone1 == "019" ? "selected" : ""  } >019</option>
-				</select>
-		    </div>
-		    <div class="col-sm-2">
-		      <input type="text" class="form-control" id="phone2" name="phone2" value="${ ! empty user.phone2 ? user.phone2 : ''}"  placeholder="변경번호">
-		    </div>
-		    <div class="col-sm-2">
-		      <input type="text" class="form-control" id="phone3" name="phone3" value="${ ! empty user.phone3 ? user.phone3 : ''}"   placeholder="변경번호">
-		    </div>
-		    <input type="hidden" name="phone"  />
-		  </div>
-		  
-		   <div class="form-group">
-		    <label for="ssn" class="col-sm-offset-1 col-sm-3 control-label">이메일</label>
-		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="email" name="email" value="${user.email}" placeholder="변경이메일">
+		      <input type="text" class="form-control" id="fileName" name="fileName" placeholder="이미지를 선택하세요.">
 		    </div>
 		  </div>
 		  
 		  <div class="form-group">
 		    <div class="col-sm-offset-4  col-sm-4 text-center">
-		      <button type="button" class="btn btn-primary"  >수 &nbsp;정</button>
+		      <button type="button" class="btn btn-primary"  >등 &nbsp;록</button>
 			  <a class="btn btn-primary btn" href="#" role="button">취 &nbsp;소</a>
 		    </div>
 		  </div>

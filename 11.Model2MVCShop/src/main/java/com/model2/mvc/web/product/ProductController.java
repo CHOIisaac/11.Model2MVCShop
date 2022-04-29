@@ -44,6 +44,13 @@ public class ProductController {
 	int pageSize;
 	
 	
+	@RequestMapping(value="addProduct", method=RequestMethod.GET )
+	public String addProduct(@ModelAttribute("product") Product product) throws Exception {
+		
+		System.out.println("/addProductView");
+		
+		return "redirect:/product/addProductView.jsp";
+	}
 	@RequestMapping(value="addProduct", method=RequestMethod.POST )
 	public String addProductView(@ModelAttribute("product") Product product, @RequestParam("manuDate") String manuDate) throws Exception {
 
@@ -70,6 +77,17 @@ public class ProductController {
 		return "forward:/product/getProduct.jsp";
 	}
 	
+	@RequestMapping(value="getProductView", method=RequestMethod.GET)
+	public String getProductView( @RequestParam("prodNo") int prodNo, Model model ) throws Exception {
+		
+		System.out.println("/getProductView");
+		//Business Logic
+		// Model °ú View ¿¬°á
+		Product product = productService.getProduct(prodNo);
+		model.addAttribute("product", product);
+		return "forward:/product/getProductView.jsp";
+	}
+	
 	@RequestMapping(value="updateProductView", method=RequestMethod.GET)
 	public String updateProductView( @RequestParam("prodNo") int prodNo , Model model ) throws Exception{
 
@@ -83,14 +101,16 @@ public class ProductController {
 	}
 	
 	@RequestMapping(value="updateProduct",method=RequestMethod.POST)
-	public String updateProduct( @ModelAttribute("product") Product product , Model model) throws Exception{
+	public String updateProduct( @ModelAttribute("product") Product product, @RequestParam("manuDate") String manuDate) throws Exception{
 
 		System.out.println("/updateProduct");
+		
+		product.setManuDate(manuDate.replace("-", ""));
 		//Business Logic
 		productService.updateProduct(product);
 		
 		
-		return "redirect:/product/getProduct?prodNo="+product.getProdNo();
+		return "redirect:/product/getProductView?prodNo="+product.getProdNo();
 	}
 	
 	@RequestMapping(value="listProduct")

@@ -56,8 +56,8 @@
 		                         <span class="caret"></span>
 		                     </a>
 		                     <ul class="dropdown-menu">
-		                         <li><a href="#">판매상품등록</a></li>
-		                         <li><a href="#">판매상품관리</a></li>
+		                         <li><a href="#">판매상품 등록</a></li>
+		                         <li><a href="#">판매상품 관리</a></li>
 		                         <li class="divider"></li>
 		                         <li><a href="#">etc..</a></li>
 		                     </ul>
@@ -120,15 +120,15 @@
 		
 		 $(function() {
 			//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-		 	$("a:contains('판매상품등록')").on("click" , function() {
+		 	$("a:contains('판매상품 등록')").on("click" , function() {
 				//$(self.location).attr("href","/user/logout");
-				self.location = "/product/addProduct";
+		 		self.location="/product/addProduct";
 			}); 
 		 });
 		
 		 $(function() {
 			//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-		 	$("a:contains('판매상품관리')").on("click" , function() {
+		 	$("a:contains('판매상품 관리')").on("click" , function() {
 				//$(self.location).attr("href","/user/logout");
 				self.location = "/product/listProduct";
 			}); 
