@@ -111,12 +111,11 @@ function fncAddProduct(){
 		      <input type="text" class="form-control" id="prodDetail" name="prodDetail" placeholder="상품상세정보를 입력하세요.">
 		    </div>
 		  </div>
-		  
-		  <div class="form-group">
-		    <label for="manuDate" class="col-sm-offset-1 col-sm-3 control-label">제조일자</label><img src="../images/ct_icon_date.gif" width="15" height="15" 
-										onclick="show_calendar('document.detailForm.manuDate', document.detailForm.manuDate.value)"/>
+
+		  <div class="form-group" >
+		    <label for="manuDate" class="col-sm-offset-1 col-sm-3 control-label">제조일자</label> 
 		    <div class="col-sm-4">
-		      <input type="text" class="form-control" id="manuDate" name="manuDate" placeholder="제조일자를 선택하세요.">
+		      <input type="Date" class="form-control" id="manuDate" name="manuDate" placeholder="제조일자를 선택하세요.">
 		    </div>
 		  </div>
 		  
