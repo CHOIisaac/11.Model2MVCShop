@@ -79,9 +79,14 @@ $(function() {
 		 var prodNo = $(this).data("param");
 	        //Debug..
 	        //alert(  $( this ).text().trim() );
-	      
+	      if("${sessionScope.user.role == 'admin'}"){
+	    	  
 	           //self.location ="/product/updateProductView?prodNo="+prodNo+"${param.menu}";
-	           self.location="/product/getProductView?prodNo="+prodNo+"${param.menu}";
+	           self.location ="/product/getProductView?prodNo="+prodNo+"${param.menu}";
+	      }else {
+	           self.location="/purchase/addPurchase?prodNo="+prodNo+"${param.menu}";
+	    	  
+	      }
 	});
 				
 	//==> userId LINK Event End User 에게 보일수 있도록 

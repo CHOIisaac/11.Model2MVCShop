@@ -133,6 +133,21 @@
 				self.location = "/product/listProduct";
 			}); 
 		 });
+		 $(function() {
+			//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+		 	$("a:contains('상 품 검 색')").on("click" , function() {
+				//$(self.location).attr("href","/user/logout");
+				self.location = "/product/listProduct";
+			}); 
+		 });
+		
+		 $(function() {
+			//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+		 	$("a:contains('구매이력조회')").on("click" , function() {
+				//$(self.location).attr("href","/user/logout");
+				self.location = "/purchase/listPurchase";
+			}); 
+		 });
 		
 		//=============  개인정보조회회 Event  처리 =============	
 	 	$( "a:contains('개인정보조회')" ).on("click" , function() {
