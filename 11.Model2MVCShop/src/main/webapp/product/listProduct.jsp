@@ -72,6 +72,7 @@ $(function() {
 	});
 });
 
+<c:if test="${param.menu=='search'}">
 $(function() {
 	
 	//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
@@ -79,20 +80,38 @@ $(function() {
 		 var prodNo = $(this).data("param");
 	        //Debug..
 	        //alert(  $( this ).text().trim() );
-	      if("${sessionScope.user.role == 'admin'}"){
 	    	  
 	           //self.location ="/product/updateProductView?prodNo="+prodNo+"${param.menu}";
-	           self.location ="/product/getProductView?prodNo="+prodNo+"${param.menu}";
-	      }else {
-	           self.location="/purchase/addPurchase?prodNo="+prodNo+"${param.menu}";
+	           self.location="/purchase/addPurchase?prodNo="+$(this).attr("prodNo");
 	    	  
-	      }
 	});
 				
 	//==> userId LINK Event End User 에게 보일수 있도록 
 	$( "td:nth-child(2)" ).css("color" , "red");
 	
 });	
+
+</c:if>
+
+<c:if test="${param.menu=='manage'}">
+$(function() {
+	
+	//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+	$( "td:nth-child(2)" ).on("click" , function() {
+		 var prodNo = $(this).data("param");
+	        //Debug..
+	        //alert(  $( this ).text().trim() );
+	    	  
+	           //self.location ="/product/updateProductView?prodNo="+prodNo+"${param.menu}";
+	           self.location ="/product/getProductView?prodNo="+$(this).attr("prodNo");
+	    	  
+	});
+				
+	//==> userId LINK Event End User 에게 보일수 있도록 
+	$( "td:nth-child(2)" ).css("color" , "red");
+	
+});	
+</c:if>
 
 $(function() {
 	$( "td:nth-child(6) > i" ).on("click" , function() {
@@ -214,7 +233,7 @@ $(function() {
 			<c:set var="i" value="${ i+1 }" />
 			<tr>
 			  <td align="center">${ i }</td>
-			  <td align="left" data-param="${product.prodNo}" title="Click : 상품정보 확인">${product.prodName}</td>
+			  <td align="left" prodNo="${product.prodNo}" title="Click : 상품정보 확인">${product.prodName}</td>
 			  <td align="left">${product.price}</td>
 			  <td align="left">${product.regDate}</td>
 			  <td align="left">${product.proTranCode}</td>

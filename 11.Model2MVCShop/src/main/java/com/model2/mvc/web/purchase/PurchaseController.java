@@ -26,7 +26,7 @@ import com.model2.mvc.service.product.ProductService;
 import com.model2.mvc.service.purchase.PurchaseService;
 
 
-//==> 회원관리 Controller
+//==> �쉶�썝愿�由� Controller
 @Controller
 @RequestMapping("/purchase/*")
 public class PurchaseController {
@@ -35,7 +35,7 @@ public class PurchaseController {
 	@Autowired
 	@Qualifier("purchaseServiceImpl")
 	private PurchaseService purchaseService;
-	//setter Method 구현 않음
+	//setter Method 援ы쁽 �븡�쓬
 		
 	@Autowired
 	@Qualifier("productServiceImpl")
@@ -45,8 +45,8 @@ public class PurchaseController {
 		System.out.println(this.getClass());
 	}
 	
-	//==> classpath:config/common.properties  ,  classpath:config/commonservice.xml 참조 할것
-	//==> 아래의 두개를 주석을 풀어 의미를 확인 할것
+	//==> classpath:config/common.properties  ,  classpath:config/commonservice.xml 李몄“ �븷寃�
+	//==> �븘�옒�쓽 �몢媛쒕�� 二쇱꽍�쓣 ���뼱 �쓽誘몃�� �솗�씤 �븷寃�
 	@Value("#{commonProperties['pageUnit']}")
 	//@Value("#{commonProperties['pageUnit'] ?: 3}")
 	int pageUnit;
@@ -95,7 +95,7 @@ public class PurchaseController {
 		System.out.println("/purchase/getPurchase : GET");
 		//Business Logic
 		Purchase purchase = purchaseService.getPurchase(tranNo);
-		// Model 과 View 연결
+		// Model 怨� View �뿰寃�
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("forward:/purchase/getPurchase.jsp");
 		modelAndView.addObject("vo", purchase);
@@ -111,7 +111,7 @@ public class PurchaseController {
 		//Business Logic
 		Purchase purchase = purchaseService.getPurchase(tranNo);
 		
-		// Model 과 View 연결
+		// Model 怨� View �뿰寃�
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("forward:/purchase/updatePurchaseView.jsp");
 		modelAndView.addObject("vo", purchase);
@@ -122,7 +122,7 @@ public class PurchaseController {
 	@RequestMapping(value="updatePurchase", method=RequestMethod.POST)
 	public ModelAndView updatePurchase( @ModelAttribute("purchase") Purchase purchase) throws Exception{
 
-		System.out.println("/purchase/updateUser : POST");
+		System.out.println("updateUser : POST 시작");
 		//Business Logic
 		System.out.println("purchase ::: " + purchase);
 		purchaseService.updatePurchase(purchase);
@@ -137,7 +137,7 @@ public class PurchaseController {
 	public ModelAndView updateTranCode(@RequestParam("prodNo") int prodNo, 
 								@RequestParam("tranCode") String tranCode) throws Exception{
 		
-		System.out.println("/purhcase/updateTranCode : GET");
+		System.out.println("updateTranCode : GET 시작");
 
 		Product product = new Product();
 		product.setProdNo(prodNo);
@@ -158,7 +158,7 @@ public class PurchaseController {
 	public ModelAndView updateTranCodeByProd(@RequestParam("prodNo") int prodNo, 
 			@RequestParam("tranCode") String tranCode) throws Exception{
 		
-		System.out.println("/purchase/updateTranCodeByProd : GET");
+		System.out.println("updateTranCodeByProd : GET 시작");
 		
 		Product product = new Product();
 		product.setProdNo(prodNo);
@@ -179,7 +179,7 @@ public class PurchaseController {
 	@RequestMapping(value="listPurchase")
 	public ModelAndView listPurchase(@ModelAttribute("search") Search search, HttpSession session) throws Exception{
 		
-		System.out.println("/purchase/listPurchase");
+		System.out.println("/listPurchase 시작");
 		
 		if(search.getCurrentPage() ==0 ){
 			search.setCurrentPage(1);
@@ -188,12 +188,12 @@ public class PurchaseController {
 		
 		User buyer = (User)session.getAttribute("user");
 		
-		// Business logic 수행
+		// Business logic �닔�뻾
 		Map<String , Object> map=purchaseService.getPurchaseList(search, buyer.getUserId());
 		Page resultPage = new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
 		System.out.println(resultPage);
 		
-		// Model 과 View 연결
+		// Model 怨� View �뿰寃�
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("forward:/purchase/listPurchase.jsp");
 		modelAndView.addObject("list", map.get("list"));

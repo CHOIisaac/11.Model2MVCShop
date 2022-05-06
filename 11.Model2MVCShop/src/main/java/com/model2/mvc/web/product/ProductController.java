@@ -114,7 +114,7 @@ public class ProductController {
 	}
 	
 	@RequestMapping(value="listProduct")
-	public String listProduct( @ModelAttribute("search") Search search , Model model ) throws Exception{
+	public String listProduct( @ModelAttribute("search") Search search , Model model, @RequestParam("menu") String menu) throws Exception{
 		
 		System.out.println("/listProduct");
 		
@@ -133,6 +133,7 @@ public class ProductController {
 		model.addAttribute("list", map.get("list"));
 		model.addAttribute("resultPage", resultPage);
 		model.addAttribute("search", search);
+		model.addAttribute("menu", menu);
 		
 		return "forward:/product/listProduct.jsp";
 	}
